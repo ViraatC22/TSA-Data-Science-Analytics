@@ -1,0 +1,22 @@
+# Local environments and Python caches
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Generated application and test output
+.streamlit/
+*.log
+tsa_selected_data.csv
+
+# Operating-system and editor files
+.DS_Store
+.idea/
+.vscode/
+
+# Local competition submission retained as a requirements/source artifact.
+# It contains team-identifying submission material and is not required at runtime.
+TSA DATA SCIENCE INTERSCHOOL.pdf
