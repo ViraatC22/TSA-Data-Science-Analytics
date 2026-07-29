@@ -39,7 +39,7 @@ Statuses: `NOT_STARTED`, `IN_PROGRESS`, `COMPLETED`, `BLOCKED`,
 | ID | Task | Reason | Acceptance criteria | Verification | Status | Commit |
 | --- | --- | --- | --- | --- | --- | --- |
 | M4-1 | Rewrite README and document provenance | Current setup and findings are inaccurate | Commands, data source/license, corrected findings, scope, risks, and structure match code | Command/link review | COMPLETED | `c7cf77a` |
-| M4-2 | Verify app, merge, push, and report | Finish the recovery without breaking main | App flow and CI pass; clean local/remote main; exact report created | AppTest; server smoke; Git/gh checks | IN_PROGRESS | Pending |
+| M4-2 | Verify app, merge, push, and report | Finish the recovery without breaking main | App flow and CI pass; clean local/remote main; exact report created | AppTest; server smoke; Git/gh checks | COMPLETED | `8361c63` |
 
 ## Deferred scope
 

@@ -140,6 +140,8 @@ secrets were found or committed.
 - Default/final branch: `main`
 - Verified implementation/documentation commit:
   `c7cf77a5b61696ee97e09c4da39db7b923881f94`
+- Final handoff report commit:
+  `8361c6397a4fd20efea89482754e39a209de40c1`
 - At verification time, local `main` and `origin/main` matched with a clean
   working tree.
 
