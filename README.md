@@ -1,94 +1,190 @@
-# TSA Data Science: The Global Standstill 🌍📉
+# The Global Standstill
 
-### **A Comprehensive Regional Analysis of the COVID-19 Pandemic’s Impact on International Tourism Economics**
+Interactive, reproducible analysis of changes in international tourism during the
+COVID-19 pandemic. The project was created for the TSA Data Science and
+Analytics competition by Viraat Chauhan and Pranav Sreepada.
 
-**Event:** Data Science and Analytics  
-**Team:** Viraat Chauhan & Pranav Sreepada  
-**Data Source:** UNWTO (2015-2022)
+**Status:** recovered and locally verified. The dashboard now separates
+validated statistical calculations from Streamlit rendering, uses one
+non-overlapping expenditure series, exposes units and sample coverage, and
+prevents incompatible source series from being combined.
 
----
+This is a descriptive educational analysis. It does not establish that transport
+mode or public policy caused the observed differences, and it does not contain a
+trained forecast model.
 
-## 📖 Overview
+## What the dashboard provides
 
-This project is a comprehensive data science portfolio analyzing the catastrophic economic impact of the COVID-19 pandemic on global tourism. Using official UNWTO data, we quantify the "Asymmetric Shock" and "Two-Speed Recovery" across three major regions: **North America, Europe, and Asia**.
+- Ten portfolio charts covering receipt trends, the 2020 shock, recovery,
+  transport modes, accommodation, cross-border financial flows, and country
+  comparisons.
+- A validated data explorer that requires an exact
+  report/category/subcategory/metric series before calculation.
+- Explicit unit, country count, observation count, and selected-series context.
+- Safe KPIs for cumulative value, peak aggregate year, and latest comparable
+  change.
+- Download of only the exact filtered series shown in the explorer.
+- Clear empty states for missing baselines or observations.
 
-The repository includes a **Streamlit Web Application** that serves as an interactive dashboard for exploring the findings, visualizing trends, and drilling down into specific country-level metrics.
+## Corrected analytical scope
 
----
+The main regional figures use only:
 
-## 🚀 Features
+```text
+Report Type: Inbound Tourism-Expenditure
+Metric: Travel
+Unit: current USD millions
+```
 
-### **1. Portfolio Report Visuals**
-A curated gallery of the 10 key figures used in our written report, interactive and built with Altair:
-*   **Baseline & Recovery:** Trends from 2015-2022 comparing pre-pandemic growth vs. post-pandemic recovery.
-*   **Economic Impact:** Deep dives into the "Emptying Effect" (Physical vs Financial loss).
-*   **Shock & Vulnerability:** Analysis of the 2020 crash (-82% in Asia vs -70% in North America).
-*   **Financial Resilience:** Balance of Payments analysis for key economies like Spain.
-*   **Case Studies:** Comparative analysis of **USA (Open/Land)** vs **Thailand (Closed/Air)** recovery models.
+The original dashboard summed both `Travel` and `Total`. Those are overlapping
+component/aggregate series, so combining them double-counted receipts.
 
-### **2. Interactive Data Explorer**
-A powerful tool for judges and users to validate our findings:
-*   **Dynamic Filtering:** Slice data by Country, Metric (Expenditure, Arrivals, etc.), and Year Range.
-*   **KPI Dashboard:** Real-time calculation of "Pandemic Impact" (Net Loss), "Market Volatility", and "Recovery Ratio".
-*   **Smart Visualizations:** Auto-scaling trend lines with rich tooltips showing YoY growth and precise volumes.
-*   **Data Export:** Download filtered datasets as CSV for external verification.
+The three regions are transparent selected-market groups, not complete official
+UN Tourism regional totals. Countries with a 2019 `Travel` observation are:
 
----
+- North America: Canada, Mexico, United States of America
+- Europe: Austria, France, Germany, Greece, Italy, Portugal, Spain, United Kingdom
+- Asia: China, India, Indonesia, Japan, Malaysia, Thailand
 
-## 🛠️ Installation & Setup
+Using that scope, the reproducible headline values are:
 
-Follow these steps to run the dashboard locally on your machine.
+| Region | 2019 receipts | 2020 change | 2022 level vs. 2019 |
+| --- | ---: | ---: | ---: |
+| Asia | 209,155 USD millions | -74.5% | 32.4% |
+| Europe | 356,428 USD millions | -58.7% | 93.5% |
+| North America | 253,378 USD millions | -61.7% | 74.6% |
 
-### **Prerequisites**
-*   Python 3.8 or higher
-*   pip (Python package installer)
+These values are regression-tested against the tracked CSV.
 
-### **1. Clone the Repository**
+## Data source, license, and privacy
+
+The runtime file `Inbound Tourism-Transport.csv` is a renamed copy of
+[UNWTO Tourism Data - Structured for Analysis on Kaggle](https://www.kaggle.com/datasets/tronheim/unwto-tourism-data-structured-for-analysis),
+an aggregation derived from UN Tourism data.
+
+- Upstream author: `tronheim` / Amin
+- Upstream license: Open Database License (database) and Database Contents
+  License (contents), as displayed by Kaggle
+- Local SHA-256:
+  `7b8d8b684b662269737c40380d11886069daf461b0b202eafdd241d6c2420a98`
+- Shape: 8,253 statistical series and 33 columns
+- Coverage: 223 countries/territories; annual columns from 1995 through 2022
+- Long-form non-missing observations after validated parsing: 91,514
+
+The file contains aggregate country statistics, not person-level records. It has
+no direct personal information or credentials. The structured source omits its
+original `Units` and source-note columns, so the application states exact units
+only where supported by the upstream description:
+
+- expenditure: USD millions;
+- inbound transport: thousands of arrivals;
+- accommodation guests/overnights: thousands; and
+- several other series: explicitly labeled as source units not included in the
+  structured file.
+
+The local competition portfolio `TSA DATA SCIENCE INTERSCHOOL.pdf` is preserved
+unchanged and intentionally ignored by Git. It contains team-identifying
+submission material, is not required by the application, and is treated as a
+historical source artifact rather than a runtime dependency.
+
+See [`docs/PROJECT_AUDIT.md`](docs/PROJECT_AUDIT.md) for the full provenance,
+privacy, and methodology review.
+
+## Requirements
+
+- Python 3.11 or newer recommended
+- Dependencies listed in `requirements.txt`
+
+## Installation
+
 ```bash
 git clone https://github.com/ViraatC22/TSA-Data-Science-Analytics.git
 cd TSA-Data-Science-Analytics
-```
-
-### **2. Create a Virtual Environment (Optional but Recommended)**
-```bash
 python3 -m venv .venv
-source .venv/bin/activate  # On Mac/Linux
-# .venv\Scripts\activate   # On Windows
+source .venv/bin/activate
+python -m pip install -r requirements.txt
 ```
 
-### **3. Install Dependencies**
+The previous local `.venv` referenced a removed Python interpreter. Recreate it
+with the commands above rather than relying on that stale environment.
+
+## Run locally
+
 ```bash
-pip install streamlit pandas altair numpy
+python -m streamlit run TSA_Data_Science_Analytics.py
 ```
 
-### **4. Run the Application**
+Streamlit prints the local URL, normally `http://localhost:8501`.
+
+The portfolio's historical deployment URL is
+[tsa-data-science-analytics-interschool.streamlit.app](https://tsa-data-science-analytics-interschool.streamlit.app/).
+As of 2026-07-29 it redirects to Streamlit authorization, so public access to
+that hosted instance is not verified. Local operation does not require an
+account or credentials.
+
+## Verification
+
+Run the canonical quality gate:
+
 ```bash
-streamlit run TSA_Data_Science_Analytics.py
+make verify
 ```
-The app should automatically open in your default browser at `http://localhost:8501`.
 
----
+It performs:
 
-## 📂 File Structure
+1. Python bytecode compilation;
+2. ten deterministic unit, real-data regression, chart, and Streamlit flow
+   tests; and
+3. a real headless Streamlit server health check.
+
+The tests cover schema failures, duplicate series, formatted thousands,
+non-numeric tokens, zero denominators, ambiguous explorer selections, corrected
+regional values, transport/accommodation/financial series, all ten Vega chart
+specifications, and both dashboard modules.
+
+## Architecture
 
 ```text
-TSA-Data-Science-Analytics/
-├── TSA_Data_Science_Analytics.py  # Main application code
-├── Inbound Tourism-Transport.csv  # Cleaned dataset (Source: UNWTO)
-├── README.md                      # Project documentation
-└── requirements.txt               # List of python dependencies
+TSA_Data_Science_Analytics.py  Streamlit presentation and interaction
+tsa_analysis.py                Validated loader and reusable statistics
+Inbound Tourism-Transport.csv Tracked aggregate source data
+tests/                         Unit, regression, chart, and app-flow tests
+scripts/smoke_streamlit.py     Real server startup check
+.github/workflows/verify.yml   Python verification matrix
+docs/                          Audit, completion plan, and final handoff
 ```
 
----
+The data path is resolved relative to the application file, so the dashboard can
+be launched from a different working directory.
 
-## 📊 Key Findings
+## Methodology limitations
 
-1.  **The Asymmetric Shock:** Asia suffered the deepest initial collapse (-82%) due to strict border closures, while North America's open-border policies mitigated the drop to -70%.
-2.  **The "Emptying" Effect:** In tourism-dependent economies like Spain, the physical "emptying" of hotels (-81% volume) was more severe than the financial loss (-76% revenue), indicating price floors.
-3.  **Two-Speed Recovery:** By 2022, Europe and North America had recovered to ~85% of 2019 levels, while Asia remained stagnant at <40%, confirming a "Two-Speed" global recovery model.
+- The country groups are a hand-selected competition taxonomy, not exhaustive
+  official regions.
+- Country and year availability varies. Aggregate sums use available
+  observations and are not forced into a balanced sample.
+- Expenditure is in current USD and is not adjusted for inflation or exchange
+  rates.
+- The source ends in 2022. Statements about 2023-2025 are not validated by the
+  supplied data or code.
+- No causal design controls for policy, income, disease burden, geography,
+  exchange rates, or other confounders.
+- No trained forecasting model, uncertainty interval, or out-of-sample forecast
+  evaluation is included.
+- The original competition PDF contains historical claims that differ from the
+  corrected reproducible dashboard; it has been preserved rather than silently
+  rewritten.
 
----
+## Security and licensing
 
-## 📜 License
+The app makes no external API calls, accepts no uploads, and uses no secrets.
+CSV download contains only the aggregate observations already present in the
+repository.
 
-This project is created for the **TSA Data Science and Analytics** competition. All original code and analysis are the intellectual property of the team members. Data is sourced from the UN World Tourism Organization (UNWTO) and is used for educational purposes.
+No license has been declared for the project code, so all code rights remain
+with the authors. The dataset retains its upstream database/content licensing
+terms and attribution requirements.
+
+The GitHub repository predates this recovery and is public because the existing
+Streamlit deployment depends on it. Visibility was preserved rather than changed
+silently. The local source PDF remains excluded.
