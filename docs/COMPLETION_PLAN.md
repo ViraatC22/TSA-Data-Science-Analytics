@@ -32,13 +32,13 @@ Statuses: `NOT_STARTED`, `IN_PROGRESS`, `COMPLETED`, `BLOCKED`,
 | --- | --- | --- | --- | --- | --- | --- |
 | M3-1 | Declare supported dependencies | README references a missing file; stale venv is unusable | Clean install succeeds from a dependency manifest | Fresh temporary Python 3.14 environment | COMPLETED | `25e79d1` |
 | M3-2 | Add deterministic tests and canonical verification | Portfolio claims tests but none exist | One command compiles, runs meaningful tests, and smoke-starts Streamlit | `make verify` | COMPLETED | `25e79d1` |
-| M3-3 | Add/repair CI | Protect public main from regression | CI performs the same core gate on supported Python | GitHub Actions | IN_PROGRESS | `8ff8a7d` |
+| M3-3 | Add/repair CI | Protect public main from regression | CI performs the same core gate on supported Python | GitHub Actions Python 3.11/3.13 | COMPLETED | `8ff8a7d` |
 
 ## Milestone 4 - Documentation and handoff
 
 | ID | Task | Reason | Acceptance criteria | Verification | Status | Commit |
 | --- | --- | --- | --- | --- | --- | --- |
-| M4-1 | Rewrite README and document provenance | Current setup and findings are inaccurate | Commands, data source/license, corrected findings, scope, risks, and structure match code | Command/link review | IN_PROGRESS | Pending |
+| M4-1 | Rewrite README and document provenance | Current setup and findings are inaccurate | Commands, data source/license, corrected findings, scope, risks, and structure match code | Command/link review | COMPLETED | `c7cf77a` |
 | M4-2 | Verify app, merge, push, and report | Finish the recovery without breaking main | App flow and CI pass; clean local/remote main; exact report created | AppTest; server smoke; Git/gh checks | IN_PROGRESS | Pending |
 
 ## Deferred scope

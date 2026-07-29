@@ -4,8 +4,8 @@ Interactive, reproducible analysis of changes in international tourism during th
 COVID-19 pandemic. The project was created for the TSA Data Science and
 Analytics competition by Viraat Chauhan and Pranav Sreepada.
 
-**Status:** recovered and locally verified. The dashboard now separates
-validated statistical calculations from Streamlit rendering, uses one
+**Status:** recovered and verified locally and in CI. The dashboard now
+separates validated statistical calculations from Streamlit rendering, uses one
 non-overlapping expenditure series, exposes units and sample coverage, and
 prevents incompatible source series from being combined.
 
